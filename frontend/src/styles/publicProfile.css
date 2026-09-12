@@ -1,0 +1,161 @@
+.public-profile-wrapper {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.public-profile-card {
+  padding: 30px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05);
+}
+
+.public-profile-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.public-profile-avatar {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eff6ff;
+  color: #2563eb;
+
+  font-size: 22px;
+  font-weight: 750;
+}
+
+.public-profile-name {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.public-profile-username {
+  margin: 4px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 13px;
+}
+
+.public-profile-bio {
+  margin: 18px 0 0;
+
+  color: #4b5563;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.public-profile-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-bottom: 28px;
+}
+
+.public-primary-button,
+.public-secondary-button {
+  padding: 10px 15px;
+
+  border-radius: 9px;
+
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.public-primary-button {
+  border: none;
+
+  background: #2563eb;
+  color: white;
+}
+
+.public-primary-button:hover {
+  background: #1d4ed8;
+}
+
+.public-secondary-button {
+  border: 1px solid #d1d5db;
+
+  background: white;
+  color: #374151;
+}
+
+.public-secondary-button:hover {
+  background: #f9fafb;
+}
+
+.public-skill-section {
+  margin-top: 25px;
+}
+
+.public-skill-title {
+  margin: 0 0 12px;
+
+  color: #1f2937;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.public-skill-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.public-skill {
+  padding: 7px 11px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.public-skill-teach {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.public-skill-learn {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+@media (max-width: 600px) {
+  .public-profile-card {
+    padding: 22px;
+  }
+
+  .public-profile-actions {
+    flex-direction: column;
+  }
+
+  .public-primary-button,
+  .public-secondary-button {
+    width: 100%;
+  }
+}

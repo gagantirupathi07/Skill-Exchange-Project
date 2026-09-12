@@ -1,0 +1,168 @@
+.dashboard-header {
+  margin-bottom: 28px;
+}
+
+.dashboard-title {
+  margin: 0;
+
+  color: #111827;
+
+  font-size: 30px;
+  font-weight: 750;
+
+  letter-spacing: -0.025em;
+}
+
+.dashboard-description {
+  margin: 8px 0 0;
+
+  color: #6b7280;
+
+  font-size: 15px;
+}
+
+.dashboard-stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 26px;
+}
+
+.stat-card {
+  padding: 22px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 24px rgba(15, 23, 42, 0.08);
+}
+
+.stat-label {
+  color: #6b7280;
+
+  font-size: 13px;
+  font-weight: 550;
+}
+
+.stat-value {
+  margin: 8px 0 0;
+
+  font-size: 30px;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+.stat-blue {
+  color: #2563eb;
+}
+
+.stat-green {
+  color: #16a34a;
+}
+
+.stat-yellow {
+  color: #ca8a04;
+}
+
+.stat-purple {
+  color: #9333ea;
+}
+
+.dashboard-skills {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.dashboard-skill-card {
+  padding: 22px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.04);
+}
+
+.dashboard-section-title {
+  margin: 0 0 16px;
+
+  color: #1f2937;
+
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.skill-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.skill-pill {
+  padding: 7px 12px;
+
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.skill-pill-blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.skill-pill-green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.empty-text {
+  margin: 0;
+
+  color: #9ca3af;
+
+  font-size: 13px;
+}
+
+@media (max-width: 1100px) {
+  .dashboard-stats {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .dashboard-skills {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr;
+  }
+}

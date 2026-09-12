@@ -1,0 +1,69 @@
+services:
+
+  postgres:
+    image: postgres:17
+    container_name: skill-exchange-db
+
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+    restart: unless-stopped
+
+
+  backend:
+    build:
+      context: ./backend
+
+    container_name: skill-exchange-backend
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+
+      SPRING_MAIL_HOST: smtp.gmail.com
+      SPRING_MAIL_PORT: 587
+      SPRING_MAIL_USERNAME: ${SPRING_MAIL_USERNAME}
+      SPRING_MAIL_PASSWORD: ${SPRING_MAIL_PASSWORD}
+
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRATION: 86400000
+
+    expose:
+      - "8080"
+
+    restart: unless-stopped
+
+
+  frontend:
+    build:
+      context: ./frontend
+
+    container_name: skill-exchange-frontend
+
+    depends_on:
+      - backend
+
+    ports:
+      - "80:80"
+
+    restart: unless-stopped
+
+
+volumes:
+  postgres_data:

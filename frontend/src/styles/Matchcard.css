@@ -1,0 +1,219 @@
+.match-card {
+  background: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: var(--radius-md);
+
+  padding: 22px;
+
+  box-shadow: var(--shadow-sm);
+
+  transition: all 0.25s ease;
+}
+
+.match-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: var(--shadow-lg);
+
+  border-color: #dbeafe;
+}
+
+
+/* HEADER */
+
+.match-header {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 18px;
+}
+
+.match-user {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.match-avatar {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-light);
+
+  color: var(--primary);
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.match-user h2 {
+  margin: 0;
+
+  font-size: 17px;
+  font-weight: 700;
+
+  color: var(--text-primary);
+}
+
+.match-user p {
+  margin: 3px 0 0;
+
+  font-size: 13px;
+
+  color: var(--text-secondary);
+}
+
+
+/* SCORE */
+
+.match-score {
+  text-align: right;
+}
+
+.match-score span {
+  display: block;
+
+  font-size: 11px;
+
+  color: var(--text-muted);
+}
+
+.match-score strong {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 23px;
+
+  color: var(--primary);
+}
+
+
+/* BADGE */
+
+.match-badge-container {
+  margin-bottom: 16px;
+}
+
+.match-two-way {
+  display: inline-block;
+
+  background: var(--success-light);
+
+  color: var(--success);
+
+  border: 1px solid #bbf7d0;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+
+/* SECTIONS */
+
+.match-section {
+  margin-bottom: 18px;
+}
+
+.match-label {
+  margin: 0 0 8px;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #4b5563;
+}
+
+.match-bio {
+  margin: 0;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  color: #4b5563;
+}
+
+.skill-tags {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+}
+
+.skill-tag {
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 11px;
+
+  font-weight: 600;
+}
+
+.skill-tag-blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.skill-tag-green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.empty-skill-text {
+  margin: 0;
+
+  font-size: 12px;
+
+  color: var(--text-muted);
+}
+
+
+/* BUTTON */
+
+.match-profile-button {
+  width: 100%;
+
+  border: none;
+
+  background: var(--primary);
+
+  color: white;
+
+  padding: 11px;
+
+  border-radius: var(--radius-sm);
+
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-top: 3px;
+
+  transition: all 0.2s ease;
+}
+
+.match-profile-button:hover {
+  background: var(--primary-dark);
+
+  transform: translateY(-1px);
+}

@@ -1,0 +1,175 @@
+.exchange-section {
+  margin-bottom: 34px;
+}
+
+.exchange-section-title {
+  margin: 0 0 14px;
+
+  color: #1f2937;
+
+  font-size: 20px;
+  font-weight: 750;
+}
+
+.exchange-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.exchange-request-card {
+  padding: 20px;
+
+  background: white;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 13px;
+
+  box-shadow: 0 3px 12px rgba(15, 23, 42, 0.035);
+}
+
+.exchange-request-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.request-user {
+  min-width: 0;
+}
+
+.request-name {
+  margin: 0;
+
+  color: #1f2937;
+
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.request-username {
+  margin: 3px 0 0;
+
+  color: #9ca3af;
+
+  font-size: 12px;
+}
+
+.request-description {
+  margin: 10px 0 0;
+
+  color: #4b5563;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.request-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.status-badge {
+  padding: 6px 10px;
+
+  border-radius: 999px;
+
+  font-size: 10px;
+  font-weight: 750;
+
+  letter-spacing: 0.04em;
+}
+
+.status-pending {
+  background: #fef3c7;
+  color: #a16207;
+}
+
+.status-accepted {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.status-rejected {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.status-cancelled {
+  background: #f1f5f9;
+  color: #64748b;
+}
+
+.request-button {
+  padding: 8px 12px;
+
+  border: none;
+  border-radius: 8px;
+
+  color: white;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.request-button:disabled {
+  opacity: 0.55;
+}
+
+.request-accept {
+  background: #16a34a;
+}
+
+.request-accept:hover {
+  background: #15803d;
+}
+
+.request-reject {
+  background: #ef4444;
+}
+
+.request-reject:hover {
+  background: #dc2626;
+}
+
+.request-cancel {
+  background: #64748b;
+}
+
+.request-cancel:hover {
+  background: #475569;
+}
+
+.empty-request-card {
+  padding: 28px 20px;
+
+  background: white;
+
+  border: 1px dashed #d1d5db;
+  border-radius: 13px;
+
+  color: #9ca3af;
+
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  .exchange-request-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .request-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

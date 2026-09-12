@@ -1,0 +1,61 @@
+/* =========================================================
+   APP LAYOUT
+========================================================= */
+
+.app-layout {
+  min-height: 100vh;
+
+  background: transparent;
+}
+
+
+.app-content-wrapper {
+
+  display: flex;
+
+  min-height: calc(100vh - 68px);
+}
+
+
+.app-main {
+
+  flex: 1;
+
+  min-width: 0;
+
+  padding: 28px;
+
+  overflow-y: auto;
+}
+
+
+.page-container {
+
+  width: 100%;
+
+  max-width: 1600px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .app-main {
+    padding: 20px;
+  }
+
+}
+
+
+@media (max-width: 640px) {
+
+  .app-main {
+    padding: 16px;
+  }
+
+}

@@ -1,0 +1,167 @@
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.app-navbar {
+
+  width: 100%;
+
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  padding: 0 28px;
+
+
+  /* =================================
+     NAVBAR COLOR
+  ================================= */
+
+  background: rgba(11, 31, 51, 0.88);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+
+  /* =================================
+     GLASS BORDER
+  ================================= */
+
+  border-bottom:
+    1px solid rgba(255, 255, 255, 0.12);
+
+
+  /* =================================
+     SHADOW
+  ================================= */
+
+  box-shadow:
+    0 8px 30px rgba(11, 31, 51, 0.16);
+
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 100;
+
+  box-sizing: border-box;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.app-logo {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: rgba(255, 255, 255, 0.96);
+
+  font-size: 22px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.02em;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.app-logo:hover {
+
+  opacity: 0.90;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   LOGO MARK
+========================================================= */
+
+.app-logo-mark {
+
+  width: 35px;
+
+  height: 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 11px;
+
+
+  background:
+    linear-gradient(
+      135deg,
+      #2563EB,
+      #38BDF8
+    );
+
+
+  color: white;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+
+  border:
+    1px solid rgba(255, 255, 255, 0.22);
+
+
+  box-shadow:
+    0 6px 20px rgba(37, 99, 235, 0.30);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 640px) {
+
+  .app-navbar {
+
+    height: 64px;
+
+    padding: 0 16px;
+  }
+
+
+  .app-logo {
+
+    font-size: 18px;
+  }
+
+
+  .app-logo-mark {
+
+    width: 32px;
+
+    height: 32px;
+
+    font-size: 15px;
+  }
+
+}
