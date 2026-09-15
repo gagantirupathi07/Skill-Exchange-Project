@@ -252,7 +252,7 @@ public class ExchangeSessionService {
             Long sessionId
     ) {
 
-        User user =
+        User teacher =
                 userRepository
                         .findByUsername(username)
                         .orElseThrow(() ->
@@ -288,20 +288,12 @@ public class ExchangeSessionService {
             );
         }
 
-        boolean isTeacher =
-                exchange.getTeacher()
-                        .getId()
-                        .equals(user.getId());
-
-        boolean isLearner =
-                exchange.getLearner()
-                        .getId()
-                        .equals(user.getId());
-
-        if (!isTeacher && !isLearner) {
+        if (!exchange.getTeacher()
+                .getId()
+                .equals(teacher.getId())) {
 
             throw new ForbiddenException(
-                    "You are not part of this exchange"
+                    "Only the teacher can complete the session"
             );
         }
 
@@ -338,80 +330,27 @@ public class ExchangeSessionService {
         LocalDateTime now =
                 LocalDateTime.now();
 
+        session.setTeacherConfirmed(true);
+        session.setTeacherConfirmedAt(now);
 
-        /*
-         * Teacher confirms.
-         */
-        if (isTeacher) {
+        session.setLearnerConfirmed(true);
+        session.setLearnerConfirmedAt(now);
 
-            if (session.isTeacherConfirmed()) {
+        session.setStatus(
+                SessionStatus.COMPLETED
+        );
 
-                throw new BadRequestException(
-                        "Teacher has already confirmed this session"
-                );
-            }
+        session.setCompletedAt(now);
 
-            session.setTeacherConfirmed(true);
-            session.setTeacherConfirmedAt(now);
-
-            /*
-             * Notify learner.
-             */
-            notificationService.createNotification(
-                    exchange.getLearner(),
-                    NotificationType.SESSION_COMPLETED,
-                    "Teacher Completed the Session",
-                    "Your teacher has confirmed that the "
-                            + exchange.getSkill().getName()
-                            + " session was completed.",
-                    session.getId()
-            );
-        }
-
-
-        /*
-         * Learner confirms.
-         */
-        if (isLearner) {
-
-            if (session.isLearnerConfirmed()) {
-
-                throw new BadRequestException(
-                        "Learner has already confirmed this session"
-                );
-            }
-
-            session.setLearnerConfirmed(true);
-            session.setLearnerConfirmedAt(now);
-
-            /*
-             * Notify teacher.
-             */
-            notificationService.createNotification(
-                    exchange.getTeacher(),
-                    NotificationType.SESSION_COMPLETED,
-                    "Learner Completed the Session",
-                    "The learner has confirmed that the "
-                            + exchange.getSkill().getName()
-                            + " session was completed.",
-                    session.getId()
-            );
-        }
-
-
-        /*
-         * Session becomes COMPLETED
-         * only after BOTH participants confirm.
-         */
-        if (session.isTeacherConfirmed()
-                && session.isLearnerConfirmed()) {
-
-            session.setStatus(
-                    SessionStatus.COMPLETED
-            );
-
-            session.setCompletedAt(now);
-        }
+        notificationService.createNotification(
+                exchange.getLearner(),
+                NotificationType.SESSION_COMPLETED,
+                "Session Completed",
+                "The "
+                        + exchange.getSkill().getName()
+                        + " learning session has been completed.",
+                session.getId()
+        );
 
         ExchangeSession savedSession =
                 exchangeSessionRepository.save(session);

@@ -155,7 +155,7 @@ public class ExchangeService {
         }
 
         /*
-         * Find the session.
+         * Find the scheduled session.
          */
         List<ExchangeSession> sessions =
                 exchangeSessionRepository
@@ -165,28 +165,62 @@ public class ExchangeService {
                 sessions.stream()
                         .filter(s ->
                                 s.getStatus()
-                                        == SessionStatus.COMPLETED
+                                        == SessionStatus.SCHEDULED
                         )
                         .findFirst()
                         .orElseThrow(() ->
                                 new BadRequestException(
-                                        "The session must be completed by both participants before completing the exchange"
+                                        "No scheduled session found for this exchange"
                                 )
                         );
 
         /*
-         * Extra safety check.
+         * Calculate session end time.
          */
-        if (!session.isTeacherConfirmed()
-                || !session.isLearnerConfirmed()) {
+        LocalDateTime sessionEnd =
+                LocalDateTime.of(
+                        session.getScheduledDate(),
+                        session.getEndTime()
+                );
+
+        /*
+         * Session must already be finished.
+         */
+        if (LocalDateTime.now()
+                .isBefore(sessionEnd)) {
 
             throw new BadRequestException(
-                    "Both teacher and learner must confirm the session before completing the exchange"
+                    "The session cannot be completed before it ends"
             );
         }
 
         /*
-         * Calculate credits.
+         * Mark session as completed.
+         *
+         * We keep both confirmation fields TRUE
+         * for compatibility with the existing model.
+         */
+        LocalDateTime completedAt =
+                LocalDateTime.now();
+
+        session.setTeacherConfirmed(true);
+        session.setTeacherConfirmedAt(completedAt);
+
+        session.setLearnerConfirmed(true);
+        session.setLearnerConfirmedAt(completedAt);
+
+        session.setStatus(
+                SessionStatus.COMPLETED
+        );
+
+        session.setCompletedAt(
+                completedAt
+        );
+
+        exchangeSessionRepository.save(session);
+
+        /*
+         * Calculate credits from session duration.
          */
         BigDecimal credits =
                 creditService.calculateCredits(
@@ -194,7 +228,7 @@ public class ExchangeService {
                 );
 
         /*
-         * Store credit amount.
+         * Store credit amount in exchange.
          */
         exchange.setCreditAmount(credits);
 
@@ -202,14 +236,14 @@ public class ExchangeService {
          * Transfer:
          *
          * learner → teacher
+         *
+         * If this fails, the entire transaction
+         * will roll back.
          */
         creditService.transferCredits(
                 exchange,
                 credits
         );
-
-        LocalDateTime completedAt =
-                LocalDateTime.now();
 
         /*
          * Mark exchange completed.
@@ -225,7 +259,6 @@ public class ExchangeService {
         Exchange savedExchange =
                 exchangeRepository.save(exchange);
 
-
         /*
          * Notify teacher.
          */
@@ -239,7 +272,6 @@ public class ExchangeService {
                 savedExchange.getId()
         );
 
-
         /*
          * Notify learner.
          */
@@ -252,7 +284,6 @@ public class ExchangeService {
                         + " skill exchange has been completed successfully.",
                 savedExchange.getId()
         );
-
 
         /*
          * Notify teacher about earned credits.
@@ -269,7 +300,6 @@ public class ExchangeService {
                 savedExchange.getId()
         );
 
-
         /*
          * Notify learner about spent credits.
          */
@@ -284,7 +314,9 @@ public class ExchangeService {
                 savedExchange.getId()
         );
 
-
+        /*
+         * Return completion response.
+         */
         return ExchangeCompletionResponse.builder()
 
                 .exchangeId(
@@ -335,8 +367,6 @@ public class ExchangeService {
 
                 .build();
     }
-
-
     @Transactional(readOnly = true)
     public ExchangeResponse getExchangeById(
             String username,
